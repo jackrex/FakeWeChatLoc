@@ -1,0 +1,373 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D823EF4C1CE8004E00FB2540 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D823EF4B1CE8004E00FB2540 /* Foundation.framework */; };
+		D823EF571CE8004E00FB2540 /* fakeloc.mm in Sources */ = {isa = PBXBuildFile; fileRef = D823EF561CE8004E00FB2540 /* fakeloc.mm */; };
+		D896D4C81CF5FC5C00DD574E /* libsubstrate.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D896D4C71CF5FC5C00DD574E /* libsubstrate.dylib */; };
+		D896D4CA1CF5FC6600DD574E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D896D4C91CF5FC6600DD574E /* CoreLocation.framework */; };
+		D896D4CD1CF5FD0F00DD574E /* TweakBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = D896D4CB1CF5FD0F00DD574E /* TweakBridge.h */; };
+		D896D4CE1CF5FD0F00DD574E /* TweakBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D896D4CC1CF5FD0F00DD574E /* TweakBridge.m */; };
+		D896D4D01CF6007A00DD574E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D896D4CF1CF6007A00DD574E /* UIKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D823EF481CE8004E00FB2540 /* fakeloc.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = fakeloc.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		D823EF4B1CE8004E00FB2540 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D823EF501CE8004E00FB2540 /* control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = control.txt; path = Package/DEBIAN/control.txt; sourceTree = "<group>"; };
+		D823EF511CE8004E00FB2540 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		D823EF531CE8004E00FB2540 /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
+		D823EF541CE8004E00FB2540 /* fakeloc-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fakeloc-Prefix.pch"; sourceTree = "<group>"; };
+		D823EF551CE8004E00FB2540 /* fakeloc.xm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = fakeloc.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		D823EF561CE8004E00FB2540 /* fakeloc.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = fakeloc.mm; sourceTree = "<group>"; };
+		D823EF5B1CE8004E00FB2540 /* fakeloc.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fakeloc.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/fakeloc.plist; sourceTree = "<group>"; };
+		D896D4C71CF5FC5C00DD574E /* libsubstrate.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libsubstrate.dylib; sourceTree = "<group>"; };
+		D896D4C91CF5FC6600DD574E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D896D4CB1CF5FD0F00DD574E /* TweakBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweakBridge.h; sourceTree = "<group>"; };
+		D896D4CC1CF5FD0F00DD574E /* TweakBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweakBridge.m; sourceTree = "<group>"; };
+		D896D4CF1CF6007A00DD574E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D823EF441CE8004E00FB2540 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D896D4D01CF6007A00DD574E /* UIKit.framework in Frameworks */,
+				D896D4CA1CF5FC6600DD574E /* CoreLocation.framework in Frameworks */,
+				D896D4C81CF5FC5C00DD574E /* libsubstrate.dylib in Frameworks */,
+				D823EF4C1CE8004E00FB2540 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D823EF3D1CE8004E00FB2540 = {
+			isa = PBXGroup;
+			children = (
+				D823EF4D1CE8004E00FB2540 /* fakeloc */,
+				D823EF4A1CE8004E00FB2540 /* Frameworks */,
+				D823EF491CE8004E00FB2540 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D823EF491CE8004E00FB2540 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D823EF481CE8004E00FB2540 /* fakeloc.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D823EF4A1CE8004E00FB2540 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D896D4CF1CF6007A00DD574E /* UIKit.framework */,
+				D896D4C91CF5FC6600DD574E /* CoreLocation.framework */,
+				D823EF4B1CE8004E00FB2540 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D823EF4D1CE8004E00FB2540 /* fakeloc */ = {
+			isa = PBXGroup;
+			children = (
+				D896D4C71CF5FC5C00DD574E /* libsubstrate.dylib */,
+				D823EF551CE8004E00FB2540 /* fakeloc.xm */,
+				D823EF561CE8004E00FB2540 /* fakeloc.mm */,
+				D823EF4E1CE8004E00FB2540 /* Package */,
+				D823EF521CE8004E00FB2540 /* Supporting Files */,
+				D896D4CB1CF5FD0F00DD574E /* TweakBridge.h */,
+				D896D4CC1CF5FD0F00DD574E /* TweakBridge.m */,
+			);
+			path = fakeloc;
+			sourceTree = "<group>";
+		};
+		D823EF4E1CE8004E00FB2540 /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				D823EF4F1CE8004E00FB2540 /* DEBIAN */,
+				D823EF581CE8004E00FB2540 /* Library */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		D823EF4F1CE8004E00FB2540 /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				D823EF501CE8004E00FB2540 /* control.txt */,
+				D823EF511CE8004E00FB2540 /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		D823EF521CE8004E00FB2540 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D823EF531CE8004E00FB2540 /* PackageVersion.plist */,
+				D823EF541CE8004E00FB2540 /* fakeloc-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D823EF581CE8004E00FB2540 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				D823EF591CE8004E00FB2540 /* MobileSubstrate */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		D823EF591CE8004E00FB2540 /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				D823EF5A1CE8004E00FB2540 /* DynamicLibraries */,
+			);
+			name = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		D823EF5A1CE8004E00FB2540 /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				D823EF5B1CE8004E00FB2540 /* fakeloc.plist */,
+			);
+			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D823EF451CE8004E00FB2540 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D896D4CD1CF5FD0F00DD574E /* TweakBridge.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D823EF471CE8004E00FB2540 /* fakeloc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D823EF5E1CE8004E00FB2540 /* Build configuration list for PBXNativeTarget "fakeloc" */;
+			buildPhases = (
+				D823EF421CE8004E00FB2540 /* ShellScript */,
+				D823EF431CE8004E00FB2540 /* Sources */,
+				D823EF441CE8004E00FB2540 /* Frameworks */,
+				D823EF451CE8004E00FB2540 /* Headers */,
+				D823EF461CE8004E00FB2540 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = fakeloc;
+			productName = fakeloc;
+			productReference = D823EF481CE8004E00FB2540 /* fakeloc.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D823EF3E1CE8004E00FB2540 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				TargetAttributes = {
+					D823EF471CE8004E00FB2540 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = D823EF411CE8004E00FB2540 /* Build configuration list for PBXProject "fakeloc" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D823EF3D1CE8004E00FB2540;
+			productRefGroup = D823EF491CE8004E00FB2540 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D823EF471CE8004E00FB2540 /* fakeloc */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D823EF421CE8004E00FB2540 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp-logos";
+		};
+		D823EF461CE8004E00FB2540 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D823EF431CE8004E00FB2540 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D823EF571CE8004E00FB2540 /* fakeloc.mm in Sources */,
+				D896D4CE1CF5FD0F00DD574E /* TweakBridge.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D823EF5C1CE8004E00FB2540 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Debug;
+		};
+		D823EF5D1CE8004E00FB2540 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Release;
+		};
+		D823EF5F1CE8004E00FB2540 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhang Li (3VJJ7663BJ)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "fakeloc/fakeloc-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/fakeloc",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = 192.168.1.109;
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Debug;
+		};
+		D823EF601CE8004E00FB2540 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhang Li (3VJJ7663BJ)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "fakeloc/fakeloc-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/fakeloc",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = 192.168.1.109;
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D823EF411CE8004E00FB2540 /* Build configuration list for PBXProject "fakeloc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D823EF5C1CE8004E00FB2540 /* Debug */,
+				D823EF5D1CE8004E00FB2540 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D823EF5E1CE8004E00FB2540 /* Build configuration list for PBXNativeTarget "fakeloc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D823EF5F1CE8004E00FB2540 /* Debug */,
+				D823EF601CE8004E00FB2540 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D823EF3E1CE8004E00FB2540 /* Project object */;
+}
