@@ -81,16 +81,19 @@ control 文件放到 control.tar.gz 中
 
 ####Mac 需要的工具
 在逆向工程中常见的 动态调试和静态分析使用的工具:
-- class-dump 
+- [class-dump](https://www.github.com/nygard/class-dump)
 > class-dump  用来dump 出越狱后的App 所有头文件的工具
 
 - IDA
 >IDA 是最好的反编译工具，其实简单的逆向只用IDA就可以完全搞定了
 
+- Hopper
+>OS X下可以使用授权费用低廉的[Hopper Disassembler](https://www.hopperapp.com)
+
 - LLDB
 > 动态调试的利器 配合 IDA 一动一静
 
-- Reveal
+- [Reveal](https://www.hopperapp.com)
 > 一个方便UI调试定位的Debug的工具，我们可以快速的对应某个App界面对应的是某个类
 
 - iFunBox
@@ -147,6 +150,8 @@ DYLD_INSERT_LIBRARIES=/path/to/dumpdecrypted.dylib /path/to/executable
 dump 之前我们可以用otool 工具看下Match-o的文件信息
 
 otool -H WeChat.decrypted
+
+使用otool -l WeChat.decrypted寻找cryptid，使用lipo拆分出解密的架构
 
 执行
 ```
