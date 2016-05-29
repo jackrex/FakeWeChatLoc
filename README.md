@@ -6,6 +6,8 @@
 ####缘由
 本文是我个人在对逆向工程强烈的兴趣驱使下，拜读《iOS应用逆向工程》，所实现的一个好玩的功能，与大家分享，也是对自己学习的一个简单总结。BTW iOS逆向论坛 [iOSRe](http://bbs.iosre.com/) 是一个很好的iOS逆向交流社区。
 
+本示例所有代码以及工具都已托管GitHub 请查看 [https://github.com/jackrex/FakeWeChatLoc](https://github.com/jackrex/FakeWeChatLoc)
+
 ####严重声明
 
 **本文所有纯属个人娱乐学习值用,相关技术仅用于学习交流，请勿用于非法目的，不得有其他任何商业用途！！！**
@@ -391,10 +393,7 @@ dpkg-deb -Zgzip -b Package fakeLoc.deb
 
 ![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463233458338.png)
 
-填写相关信息，这些就不再叙述了，如果提交成功则会收到一封如下邮件
-![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463233657429.png)
-
-如果你的App被拒，你就邮件和回邮件的人沟通（一般是管理员 optimo），对方挺Nice的，你只要按照他们说的要求改，坚持自己正确的原则，一般是没有问题的~
+填写相关信息，这些就不再叙述了。
 
 ### 总结
 本文抛砖引玉，希望你对iOS越狱有一个初步的理解，能够完成自己的任意App，开发出更好玩的Tweak，比如微信抢红包的插件是不是就看似也不难实现了呢，本示例工程都托管在Github上，其中fakeloc 是 dylib 即tweak   TestFakeTweak是app 工程，HackAppTool 我们上述文章描述需要用的第三方工具
