@@ -67,7 +67,7 @@ control 文件放到 control.tar.gz 中
 
 - 其他iOS程序类型
 1. Dynamic Library
-我们上面说的DynamicLibraries 就是放置动态库的地方
+我们上面说的DynamicLibraries 就是MobileSubstrate放置动态库的地方，该目录下的会被ms自动选择性加载
 2. Daemon
 这个是后台运行程序，守护进程的程序，例如一直监听通话来电的进程 等等，这个就不多将了。
 
@@ -81,16 +81,19 @@ control 文件放到 control.tar.gz 中
 
 ####Mac 需要的工具
 在逆向工程中常见的 动态调试和静态分析使用的工具:
-- class-dump 
+- [class-dump](https://www.github.com/nygard/class-dump)
 > class-dump  用来dump 出越狱后的App 所有头文件的工具
 
 - IDA
 >IDA 是最好的反编译工具，其实简单的逆向只用IDA就可以完全搞定了
 
+- Hopper
+>OS X下可以使用授权费用低廉的[Hopper Disassembler](https://www.hopperapp.com)
+
 - LLDB
 > 动态调试的利器 配合 IDA 一动一静
 
-- Reveal
+- [Reveal](https://www.hopperapp.com)
 > 一个方便UI调试定位的Debug的工具，我们可以快速的对应某个App界面对应的是某个类
 
 - iFunBox
@@ -121,6 +124,9 @@ control 文件放到 control.tar.gz 中
 这个原因是因为在上传AppStore 之后，AppStore自动给所有的ipa 进行了加密处理，所以我们要dump之前需要对微信的二进制文件进行砸壳处理
 
 ##### 给App砸壳
+我们首先应当尝试更加方便的[Clutch](https://github.com/KJCracks/Clutch)
+
+当Clutch失败时，尝试如下步骤
 我们需要一个dumpdecrypted.dylib 这样一个工具对我们的App 砸壳
 我们 先ssh 到我们的iOS手机上，我们把所有的程序都结束掉，单单开微信一个然后执行
 ``` powershell
@@ -147,6 +153,8 @@ DYLD_INSERT_LIBRARIES=/path/to/dumpdecrypted.dylib /path/to/executable
 dump 之前我们可以用otool 工具看下Match-o的文件信息
 
 otool -H WeChat.decrypted
+
+使用otool -l WeChat.decrypted寻找cryptid，使用lipo拆分出解密的架构
 
 执行
 ```
