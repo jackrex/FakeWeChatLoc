@@ -26,7 +26,7 @@ MobileSubstrate 是一个能够让iOS 开发方便hook的一个framework，Mobil
 
 ####iOS 目录层级结构
 
-![Alt text](./pic/1463232711046.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463232711046.png)
 这种基于Unix 衍生的操作系统一般目录层级都有相通之初，不妨可以对比Android 以及 MacOS，会发现好多目录名是一致的，我么来挑一些简单讲解下：
 ```
 /bin binnary ，系统常用的基本二进制文件 例如 cd, ls, ps 等
@@ -34,7 +34,6 @@ MobileSubstrate 是一个能够让iOS 开发方便hook的一个framework，Mobil
 /var variable 存放经常更改的东西，例如 logs，用户数据，/var/mobile/Applications 是纺织AppStore 下载的 App
 /Applications 存放所有系统App，以及从Cydia下载的App路径
 /Library  存放了系统App的数据，其中有一个/Library/MobileSubstrate 目录，MobileSubstrate 是一个hook 功能开发平台，其中内容如下图所示，我们所开发的插件都被放置到这个里面
-![Alt text](./pic/1463234811527.png)
 /Library/MobileSubstrate 里面文件类型主要有 dylib，plist
 dylib 是动态加载库，就是tweak
 plist 配合dylib 使用的filter 文件，指定注入目标，及hook的目标
@@ -50,14 +49,14 @@ plist 配合dylib 使用的filter 文件，指定注入目标，及hook的目标
 - iOS 安装包对比
 **其实各大软件包虽然格式不一样，诸如 .apk, .ipa .deb .app 等等，其实实质都是一个zip 将二进制和资源文件合理的规划罗列出来**
 1. 包内容对比：
- ![Alt text](./pic/1463271536818.png)
+ ![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463271536818.png)
  Payload文件夹:里面包含了app使用的图片以及二进制文件等
  iTunesArtwork:实际上是无后缀的png图片，在iTunes等上显示用
  iTunesMetadata.plist记录购买者的信息，软件版本，售价等
  com.apple.ZipMetadata.plist 是
  
-![Alt text](./pic/1463271594174.png)
-![Alt text](./pic/1463272025376.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463271594174.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463272025376.png)
 
 Deb 结构其实是对Library Applications gzip 为 data.tar.gz里面
 control 文件放到 control.tar.gz 中
@@ -117,7 +116,7 @@ control 文件放到 control.tar.gz 中
 #### 静态分析
 根据上述所理解的情况，由于我们是想在微信中模拟定位，所以我们把微信作为我们的分析对象。
 使用 [class-dump](https://github.com/nygard/class-dump) 导出微信的头文件, 虽然我们在class-dump 官网上看到 直接导出的方式 class-dump -H xxx -o output/ 但是我们直接解压ipa 中的wechat 里面 去dump 是不行，我们会发现在output 文件夹里只有 CDStructures.h文件，而且是空的
-![Alt text](./pic/1463304272242.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463304272242.png)
 
 这个原因是因为在上传AppStore 之后，AppStore自动给所有的ipa 进行了加密处理，所以我们要dump之前需要对微信的二进制文件进行砸壳处理
 
@@ -155,14 +154,14 @@ otool -H WeChat.decrypted
 ```
 在当前目录下生成一个Output文件夹里面具有微信导出所有的头文件，包括第三方sdk等，我们把这些所有头文件放到一个空的Xcode 工程中方便查看。
 
-![Alt text](./pic/1463308416430.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463308416430.png)
 
 我们根据直觉发现 Appdelegate 是微信的MircoMessengerAppDelegate，可以大概看到微信的项目结构等，其实逆向也是学习的一种方式
 
 接着我们来想想我们要实现的功能，我们要改变我们的位置从而改变附近的人，我们大致可以猜想这个类应该交 Nearby Location 之类的，我们可以搜索对应的头文件。
 
 我们发现搜Nearby 之后有这么多，到底哪一个是呢
-![Alt text](./pic/1463308602134.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463308602134.png)
 
 其实我们除了排除法和一个一个推测之外，我们可以使用Reaveal 这个强大的工具帮我们定位
 
@@ -170,18 +169,18 @@ otool -H WeChat.decrypted
 可以说class-dump 帮我们列出了整个header 文件，让我们对项目的整体结构有了一个大概的认识，但是对应具体.m 中的实现方案是哪一种，对于我们来说还是黑盒。这个时候我们就需要使用IDA强大的工具 进行分析。
 
 打开IDA，选择new
-![Alt text](./pic/1463309017324.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463309017324.png)
 
 我们把从Wechat.app 里面的WeChat 二进制拿出来，拖到上面IDA中，
 由于我使用的是itouch 5 cpu 架构是armv7 所有用第一个，如果用错的话，则打断点得到的offset 是错误的，从而不能正常的debg
-![Alt text](./pic/1463309168962.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463309168962.png)
 
 处理完成后如下图所示
-![Alt text](./pic/1464188771235.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464188771235.png)
 
 
 其中我们可以轻易的看到 MicroMessengerAppDelegate 里面具体方法的实现，按空格键展开到视图模式
-![Alt text](./pic/1464188817891.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464188817891.png)
 
 这里我们就可以看到.m中的实现了
 
@@ -195,12 +194,12 @@ debugserver *:1234 -a "WeChat"
 运行 lldb
 process connect connect://iOSIP:1234
 
-![Alt text](./pic/1464189237752.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464189237752.png)
 
 
 3. 获取ASLR的offset 
 image list -o -f
-![Alt text](./pic/1464189320392.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464189320392.png)
 
 offset 是 0xd000
 
@@ -229,10 +228,10 @@ Tweak 是基于MobileSubstrate 编写的，可以在运行时更改hook的App
 ####安装iOSOpenDev
 1. 安装很简单，大家下载 [installer ](http://iosopendev.com/download/) 进行安装
 2. 安装完成后，创建新项目会在template 中iOS出现 iOSOpenDev 
-![Alt text](./pic/1463269166273.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463269166273.png)
 
 3. 在这里我们选择Logos Tweak，创建完成如下
-![Alt text](./pic/1463273711206.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463273711206.png)
 
 其中有一个fakeloc.xm 的文件，这个就是我们要进行代码编写的地方。打开fakeloc.xm文件我们可以看到里面的代码使用 logos 完成的，对于logos 这种新的一门语言，大家不用担心，其基本的语法和Objc类似，有几个特定的语法需要特别注意下：
 
@@ -244,13 +243,13 @@ Tweak 是基于MobileSubstrate 编写的，可以在运行时更改hook的App
 fakeloc.xm 对应的是 fakeloc.mm
 
 我们在上述
-![Alt text](./pic/1463303717846.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463303717846.png)
 
 
 在build Settings 上可以看到，底下有一栏是User-Define，这里是我们自定义的部分，在 **iOSOpenDevDevice** 的地方写上我们iOS 设备的ip地址 （局域网地址 如 192.168.1.103),前提是iOS 设备安装 OpenSSH
-![Alt text](./pic/1463303094444.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463303094444.png)
 
-![Alt text](./pic/1464190757164.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464190757164.png)
 ssh 认证错误
 iosod sshkey -h 192.168.1.109
 
@@ -262,13 +261,13 @@ iosod sshkey -h 192.168.1.109
 
 先创建一个新的项目和正常一样,按照[如下方法配置](https://github.com/kokoabim/iOSOpenDev/wiki/Convert-to-iOSOpenDev-Project)后更改Build Settings。
 
-![Alt text](./pic/1464223875136.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464223875136.png)
 
 增加Run Script，把control 从copy bundle resources 移除
-![Alt text](./pic/1464225043534.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464225043534.png)
 
 项目整体结构 
-![Alt text](./pic/1464225149037.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464225149037.png)
 
 
 Build for Profiling 执行程序
@@ -338,10 +337,10 @@ Build for Profiling 执行程序
 iOS 系统可安装的包格式和结构我们在上文已经阐述过，现在是如何生成Deb 包
 
 我们分别取出 dylib 和 app 的生成的目录
-![Alt text](./pic/1464392205173.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464392205173.png)
 
 统一都放到一个单独的Package 目录下，最后的目录结构如下图
-![Alt text](./pic/1464392336275.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464392336275.png)
 
 
 #### 执行打包命令
@@ -354,15 +353,15 @@ dpkg-deb -Zgzip -b Package fakeLoc.deb
 
 ```
 生成的安装包如下，然后我们scp 到设备中
-![Alt text](./pic/1464392408794.png)
-![Alt text](./pic/1464392560839.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464392408794.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464392560839.png)
 
 
 我们使用iFunbox 把生成好的fakeLoc .deb 拖到根目录下，然后在手机上打开iFile，点击fakeLoc.deb  安装程序，安装完之后我们把AppSync 重新安装一遍重启手机，然后就能打开我们的App了，同时发现长按我们的App 和系统应用， Cydia 等一样，是不可以卸载的，应
 为我们是安装到了/Applications 下面，卸载可以使用命令行删除，或者使用Cydia。
 
 安装完成，之后重启设备就行
-![Alt text](./pic/1464392859055.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464392859055.png)
 
 
 
@@ -372,16 +371,16 @@ dpkg-deb -Zgzip -b Package fakeLoc.deb
 我们可以在 [地图选址器](http://lbs.qq.com/tool/getpoint/index.html) 选择不同的位置，进行测试
 
 1. 首先我们先输入北京的坐标
-![Alt text](./pic/1464391571144.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464391571144.png)
 2. 然后打开微信附件的人
-![Alt text](./pic/1464391610634.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464391610634.png)
 
 可以看到大部分人都是北京的
-![Alt text](./pic/1464391642329.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464391642329.png)
 
 3. 我们在重新输入一个地址，比如广州，然后在打开微信
-![Alt text](./pic/1464391684987.png)
-![Alt text](./pic/1464391698790.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464391684987.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1464391698790.png)
 
 成功模拟了微信附近的人
 
@@ -390,10 +389,10 @@ dpkg-deb -Zgzip -b Package fakeLoc.deb
 这可不向发布到AppStore那样，首先你需要一个托管源，如果不想自己搭建则可以采用
 [thebigboss.org/hosting-repository-cydia/submit-your-app](thebigboss.org/hosting-repository-cydia/submit-your-app)
 
-![Alt text](./pic/1463233458338.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463233458338.png)
 
 填写相关信息，这些就不再叙述了，如果提交成功则会收到一封如下邮件
-![Alt text](./pic/1463233657429.png)
+![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463233657429.png)
 
 如果你的App被拒，你就邮件和回邮件的人沟通（一般是管理员 optimo），对方挺Nice的，你只要按照他们说的要求改，坚持自己正确的原则，一般是没有问题的~
 
