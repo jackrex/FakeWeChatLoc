@@ -67,7 +67,7 @@ control 文件放到 control.tar.gz 中
 
 - 其他iOS程序类型
 1. Dynamic Library
-我们上面说的DynamicLibraries 就是放置动态库的地方
+我们上面说的DynamicLibraries 就是MobileSubstrate放置动态库的地方，该目录下的会被ms自动选择性加载
 2. Daemon
 这个是后台运行程序，守护进程的程序，例如一直监听通话来电的进程 等等，这个就不多将了。
 
@@ -124,6 +124,9 @@ control 文件放到 control.tar.gz 中
 这个原因是因为在上传AppStore 之后，AppStore自动给所有的ipa 进行了加密处理，所以我们要dump之前需要对微信的二进制文件进行砸壳处理
 
 ##### 给App砸壳
+我们首先应当尝试更加方便的[Clutch](https://github.com/KJCracks/Clutch)
+
+当Clutch失败时，尝试如下步骤
 我们需要一个dumpdecrypted.dylib 这样一个工具对我们的App 砸壳
 我们 先ssh 到我们的iOS手机上，我们把所有的程序都结束掉，单单开微信一个然后执行
 ``` powershell
