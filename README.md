@@ -46,7 +46,7 @@ plist 配合dylib 使用的filter 文件，指定注入目标，及hook的目标
 - iOS 安装包格式
 1. ipa 苹果推出的iOS 专有安装包，一般从AppStore下载的包格式，安装路径/var/mobile/Applications，长按可删除
 2. deb 是属于Debain系(使用过debain linux 系统的都知道)特有的安装包，iOS 系统起源于Unix，所以兼容deb安装包，Cydia下载的App就是deb格式的，安装路径为到 /Applications ，长按不可删除，必须使用root 权限的命令行或者Cydia移除
-3. __pxl__ （这种格式起源于Mac上的pkg，现在已经废弃）
+3. __pxl__ （~~这种格式起源于Mac上的pkg，现在已经废弃~~原本是91手机助手自己创建的基于zip封装的格式，该格式所有的app都作为root安装，好不优雅）
 
 - iOS 安装包对比
 **其实各大软件包虽然格式不一样，诸如 .apk, .ipa .deb .app 等等，其实实质都是一个zip 将二进制和资源文件合理的规划罗列出来**
@@ -64,14 +64,14 @@ Deb 结构其实是对Library Applications gzip 为 data.tar.gz里面
 control 文件放到 control.tar.gz 中
 
 2. 权限： deb 安装到/Applications 下属于 root 用户组，所以可以读写权限和 一般的 .ipa mobile 用户不一样
-3. Deb 文件的安装方式就例如把本身自己文件路径完全拷贝到iOS 系统中
+3. Deb 文件的安装方式就例如把本身自己文件路径完全拷贝到iOS 系统中，当control包中有postinst等脚本时按照规则执行脚本
 
 
 - 其他iOS程序类型
 1. Dynamic Library
-我们上面说的DynamicLibraries 就是放置动态库的地方
+我们上面说的DynamicLibraries 就是MobileSubstrate放置动态库的地方，该目录下的会被ms自动选择性加载
 2. Daemon
-这个是后台运行程序，守护进程的程序，例如一直监听通话来电的进程 等等，这个就不多将了。
+这个是后台运行程序，守护进程的程序，例如一直监听通话来电的进程 等等，这个就不多讲了。
 
 ### 准备工作
 #### 硬件设备：
@@ -83,16 +83,19 @@ control 文件放到 control.tar.gz 中
 
 ####Mac 需要的工具
 在逆向工程中常见的 动态调试和静态分析使用的工具:
-- class-dump 
+- [class-dump](https://www.github.com/nygard/class-dump)
 > class-dump  用来dump 出越狱后的App 所有头文件的工具
 
 - IDA
 >IDA 是最好的反编译工具，其实简单的逆向只用IDA就可以完全搞定了
 
+- Hopper
+>OS X下可以使用授权费用低廉的[Hopper Disassembler](https://www.hopperapp.com)
+
 - LLDB
 > 动态调试的利器 配合 IDA 一动一静
 
-- Reveal
+- [Reveal](https://www.hopperapp.com)
 > 一个方便UI调试定位的Debug的工具，我们可以快速的对应某个App界面对应的是某个类
 
 - iFunBox
@@ -110,7 +113,7 @@ control 文件放到 control.tar.gz 中
 >  一个在手机方便管理文件系统的软件，犹如iFunbox ，Android 的Re管理器，可以方便的修改文件 安装Deb二进制文件
 
 - APPSync 
-> APPsync是iPhone、iPad、iPod touch越狱后最常安装的补丁，安装后可以绕过系统验证，随意安装、运行破解的ipa软件。
+> APPsync是iPhone、iPad、iPod touch越狱后最常安装的补丁，安装后可以绕过系统签名验证，随意安装、运行破解的ipa软件。
 
 
 ### 逆向过程
@@ -123,6 +126,9 @@ control 文件放到 control.tar.gz 中
 这个原因是因为在上传AppStore 之后，AppStore自动给所有的ipa 进行了加密处理，所以我们要dump之前需要对微信的二进制文件进行砸壳处理
 
 ##### 给App砸壳
+我们首先应当尝试更加方便的[Clutch](https://github.com/KJCracks/Clutch)
+
+当Clutch失败时，尝试如下步骤
 我们需要一个dumpdecrypted.dylib 这样一个工具对我们的App 砸壳
 我们 先ssh 到我们的iOS手机上，我们把所有的程序都结束掉，单单开微信一个然后执行
 ``` powershell
@@ -150,6 +156,8 @@ dump 之前我们可以用otool 工具看下Match-o的文件信息
 
 otool -H WeChat.decrypted
 
+使用otool -l WeChat.decrypted寻找cryptid，使用lipo拆分出解密的架构
+
 执行
 ```
 ./class-dump -H WeChat.decrypted --arch armv7  -o output/
@@ -165,7 +173,7 @@ otool -H WeChat.decrypted
 我们发现搜Nearby 之后有这么多，到底哪一个是呢
 ![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463308602134.png)
 
-其实我们除了排除法和一个一个推测之外，我们可以使用Reaveal 这个强大的工具帮我们定位
+其实我们除了排除法和一个一个推测之外，我们可以使用Reveal 这个强大的工具帮我们定位
 
 ##### 使用IDA静态分析
 可以说class-dump 帮我们列出了整个header 文件，让我们对项目的整体结构有了一个大概的认识，但是对应具体.m 中的实现方案是哪一种，对于我们来说还是黑盒。这个时候我们就需要使用IDA强大的工具 进行分析。
