@@ -24,28 +24,28 @@ MobileSubstrate 是一个能够让iOS 开发方便hook的一个framework，Mobil
 2. MobileLoader 主要用来加载第三方动态库 即是tweak/*.dylib
 3. Safe Mode 安全模式，防止第三方插件的Crash对主体App造成的影响
 
--   由此可见 有了MobileSubstrate 作为基石，加上逆向工程，我们几乎可以完成我们想做的任何事情
+-   由此可见 有了Mobile Substrate 作为基石，加上逆向工程，我们几乎可以完成我们想做的任何事情
 
 ####iOS 目录层级结构
 
 ![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463232711046.png)
 这种基于Unix 衍生的操作系统一般目录层级都有相通之初，不妨可以对比Android 以及 MacOS，会发现好多目录名是一致的，我么来挑一些简单讲解下：
 ```
-/bin binnary ，系统常用的基本二进制文件 例如 cd, ls, ps 等
-/usr 包含大多用户工具库
-/var variable 存放经常更改的东西，例如 logs，用户数据，/var/mobile/Applications 是纺织AppStore 下载的 App
-/Applications 存放所有系统App，以及从Cydia下载的App路径
-/Library  存放了系统App的数据，其中有一个/Library/MobileSubstrate 目录，MobileSubstrate 是一个hook 功能开发平台，其中内容如下图所示，我们所开发的插件都被放置到这个里面
-/Library/MobileSubstrate 里面文件类型主要有 dylib，plist
+`/bin binnary` ，系统常用的基本二进制文件 例如 cd, ls, ps 等
+`/usr` 包含大多用户工具库
+`/var variable` 存放经常更改的东西，例如 logs，用户数据，/var/mobile/Applications 是纺织AppStore 下载的 App
+`/Applications` 存放所有系统App，以及从Cydia下载的App路径
+`/Library`  存放了系统App的数据，其中有一个/Library/MobileSubstrate 目录，MobileSubstrate 是一个hook 功能开发平台，其中内容如下图所示，我们所开发的插件都被放置到这个里面
+`/Library/MobileSubstrate` 里面文件类型主要有 dylib，plist
 dylib 是动态加载库，就是tweak
 plist 配合dylib 使用的filter 文件，指定注入目标，及hook的目标
-/System 存放iOS 各种系统framework
-/User 指向 /var/mobile 即是我们一般用户的主目录 
+`/System` 存放iOS 各种系统framework
+`/User` 指向 /var/mobile 即是我们一般用户的主目录 
 ```
 #### iOS 程序类型
 - iOS 安装包格式
 1. ipa 苹果推出的iOS 专有安装包，一般从AppStore下载的包格式，安装路径/var/mobile/Applications，长按可删除
-2. deb 是属于Debain系(使用过debain linux 系统的都知道)特有的安装包，iOS 系统起源于Unix，所以兼容deb安装包，Cydia下载的App就是deb格式的，安装路径为到 /Applications ，长按不可删除，必须使用root 权限的命令行或者Cydia移除
+2. deb 是属于Debain系(使用过debian Linux 系统的都知道)特有的安装包，iOS 系统起源于Unix，所以兼容deb安装包，Cydia下载的App就是deb格式的，安装路径为到 /Applications ，长按不可删除，必须使用root 权限的命令行或者Cydia移除
 3. __pxl__ （~~这种格式起源于Mac上的pkg，现在已经废弃~~原本是91手机助手自己创建的基于zip封装的格式，该格式所有的app都作为root安装，好不优雅）
 
 - iOS 安装包对比
@@ -77,11 +77,11 @@ control 文件放到 control.tar.gz 中
 #### 硬件设备：
 -  Mac
 -  已越狱的iDevice
-####辅助软件 : 
+#### 辅助软件 : 
 - [iOSOpenDev](http://iosopendev.com/)
 - [TheOS](http://iphonedevwiki.net/index.php/Theos/Setup)
 
-####Mac 需要的工具
+#### Mac 需要的工具
 在逆向工程中常见的 动态调试和静态分析使用的工具:
 - [class-dump](https://www.github.com/nygard/class-dump)
 > class-dump  用来dump 出越狱后的App 所有头文件的工具
