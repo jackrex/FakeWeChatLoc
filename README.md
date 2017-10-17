@@ -1,19 +1,19 @@
-##手把手教你制作一款iOS越狱App，伪装微信位置
+## 手把手教你制作一款iOS越狱App，伪装微信位置
 
 [TOC]
 
 ### 说明
-####缘由
+#### 缘由
 本文是我个人在对逆向工程强烈的兴趣驱使下，拜读《iOS应用逆向工程》，所实现的一个好玩的功能，与大家分享，也是对自己学习的一个简单总结。BTW iOS逆向论坛 [iOSRe](http://bbs.iosre.com/) 是一个很好的iOS逆向交流社区。
 
 本示例所有代码以及工具都已托管GitHub 请查看 [https://github.com/jackrex/FakeWeChatLoc](https://github.com/jackrex/FakeWeChatLoc)
 
-####严重声明
+#### 严重声明
 
 **本文所有纯属个人娱乐学习值用,相关技术仅用于学习交流，请勿用于非法目的，不得有其他任何商业用途！！！**
 
 ### 概念
-####越狱的原理：
+#### 越狱的原理：
 iOS系统越狱，其实说白了，和Android的Root类似，相当于对手机权限的提升，使得让你可以操纵之前你操纵不了的事物。
 
 由于Objective-C 是面向对象的高级语言，iOS 采用的文件格式 Mach-O 包含了很多metadata 信息可以让我们使用 class-dump 还原其头文件，这个为iOS 的逆向有了很好的开端。
@@ -26,7 +26,7 @@ MobileSubstrate 是一个能够让iOS 开发方便hook的一个framework，Mobil
 
 -   由此可见 有了Mobile Substrate 作为基石，加上逆向工程，我们几乎可以完成我们想做的任何事情
 
-####iOS 目录层级结构
+#### iOS 目录层级结构
 
 ![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463232711046.png)
 这种基于Unix 衍生的操作系统一般目录层级都有相通之初，不妨可以对比Android 以及 MacOS，会发现好多目录名是一致的，我么来挑一些简单讲解下：
@@ -102,7 +102,7 @@ control 文件放到 control.tar.gz 中
 > 方便的文件管理辅助软件
 
 
-#####iOS 需要使用的辅助开发工具
+##### iOS 需要使用的辅助开发工具
 - OpenSSH
 > OpenSSH 可以让你的电脑远程登录你的手机
 
@@ -235,7 +235,7 @@ Tweak 是基于MobileSubstrate 编写的，可以在运行时更改hook的App
 #### 了解 Theos
 [Theos](http://iphonedevwiki.net/index.php/Theos/Getting_Started) 是一个越狱开发工具包，在《iOS应用逆向工程书中》也是介绍了这种方式，但是我个人更喜欢使用iOSOpenDev 的方式去创建项目(ps: 就和熟悉了git 命令行之后觉得用sourceTree 更直观)，所以这里简单提及一下，感觉iOSOpenDev 像是把命令行式的NIC模板变成了可视化的，其实差不多都没有多难。
 
-####安装iOSOpenDev
+#### 安装iOSOpenDev
 1. 安装很简单，大家下载 [installer ](http://iosopendev.com/download/) 进行安装
 2. 安装完成后，创建新项目会在template 中iOS出现 iOSOpenDev 
 ![Alt text](https://raw.githubusercontent.com/jackrex/FakeWeChatLoc/master/pic/1463269166273.png)
